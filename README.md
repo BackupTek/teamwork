@@ -32,7 +32,6 @@ php artisan publish:teamwork
 ```
 
 ### Testing
-To run the test suit move into the terminal and type:
 ``` bash
 composer test
 ```

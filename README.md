@@ -15,14 +15,15 @@ You can install the package via composer:
 composer require digitalequation/teamwork
 ```
 
-Run the Artisan install command:
+Run the package install command:
 ```bash
-php artisan install:teamwork
+php artisan teamwork:install
 ```
+This will publish and register the TeamworkServiceProvider and will also generate a config file `config/teamwork.php`.
 
-Publish the config file:
+If you edit the config file and want to restore the defaults run:
 ```bash
-php artisan publish:teamwork
+php artisan teamwork:publish
 ```
 
 ## Usage

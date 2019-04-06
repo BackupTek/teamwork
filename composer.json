@@ -1,0 +1,61 @@
+{
+  "name": "digitalequation/teamwork",
+  "description": "Laravel Teamwork Library (Desk, HelpDocs,Tickets)",
+  "keywords": [
+    "laravel",
+    "teamwork"
+  ],
+  "homepage": "https://github.com/digitalequation/teamwork",
+  "license": "MIT",
+  "type": "library",
+  "authors": [
+    {
+      "name": "Robert Cristian Chiribuc",
+      "email": "robert@thebug.ro",
+      "role": "Developer"
+    },
+    {
+      "name": "Marcel Mihai Bontaș",
+      "email": "marcel.bontas@yandex.ru",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "guzzlehttp/guzzle": "~6.0",
+    "illuminate/support": "5.8.*",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "chiribuc/php-dump": "^1.0",
+    "orchestra/testbench": "3.8.*",
+    "phpunit/phpunit": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "DigitalEquation\\Teamwork\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DigitalEquation\\Teamwork\\Tests\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "DigitalEquation\\Teamwork\\TeamworkServiceProvider"
+      ],
+      "aliases": {
+        "Teamwork": "DigitalEquation\\Teamwork\\TeamworkFacade"
+      }
+    }
+  }
+}

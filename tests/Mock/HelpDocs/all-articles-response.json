@@ -1,0 +1,52 @@
+{
+  "article": {
+    "id": 3342,
+    "categories": [
+      1689,
+      1712,
+      1713,
+      1825
+    ],
+    "contents": "<div>See the video tutorial here:&nbsp;<a href=\"https:\/\/screencast.com\/t\/2TdUch088Z7\">https:\/\/screencast.com\/t\/2TdUch088Z7<\/a><br><\/div><div><br><\/div><div>In this short video we go into a few things you should pay attention to, a few things you might miss or overlook and some tips on how to get the most out of your press release distribution efforts!<\/div>",
+    "createdAt": "2019-01-08T22:24:32Z",
+    "createdBy": {
+      "id": 646546,
+      "email": "some@user.com",
+      "firstName": "Some",
+      "lastName": "User",
+      "avatarURL": "http:\/\/google.com\/491882\/userAvatar\/twia_a0bd48c1cda28ed7583a7cbf5a2a8a76.png",
+      "type": "user",
+      "notes": "",
+      "gender": ""
+    },
+    "currentVersionId": 11346,
+    "description": "",
+    "displayOrder": 10000,
+    "disqusEnabled": true,
+    "editMethod": "html",
+    "helpdocSiteId": 460,
+    "isPrivate": false,
+    "keywords": [],
+    "oldURL": "",
+    "popularity": 0,
+    "previewUrl": "https:\/\/subdomain.helpdocs.com\/articles\/basics-tips-tricks-and-things-to-call-attention-to?preview=true",
+    "publicUrl": "http:\/\/training.quantumnewswire.com\/press-releases\/basics-tips-tricks-and-things-to-call-attention-to",
+    "relatedArticles": [],
+    "slug": "basics-tips-tricks-and-things-to-call-attention-to",
+    "textContents": "",
+    "title": "Basics - Tips, Tricks and Things to Call Attention To",
+    "updatedAt": "2019-01-08T22:25:20Z",
+    "updatedBy": {
+      "id": 646546,
+      "email": "some@user.com",
+      "firstName": "Some",
+      "lastName": "User",
+      "avatarURL": "http:\/\/google.com\/491882\/userAvatar\/twia_a0bd48c1cda28ed7583a7cbf5a2a8a76.png",
+      "type": "user",
+      "notes": "",
+      "gender": ""
+    },
+    "versionCount": 2,
+    "status": "Published"
+  }
+}

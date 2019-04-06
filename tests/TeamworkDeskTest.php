@@ -101,11 +101,14 @@ class TeamworkDeskTest extends TeamworkTestCase
     /** @test */
     public function it_should_upload_a_file_and_return_the_attachment_id()
     {
-        $request  = $this->getUploadFileRequest('file');
-        $body     = file_get_contents(__DIR__ . '/Mock/Tickets/upload-data.json');
+        $request = $this->getUploadFileRequest('files', true);
+        $file    = $request->file('files')[0];
+
+        $body     = file_get_contents(__DIR__ . '/Mock/Desk/upload-data.json');
         $client   = $this->mockClient(200, $body);
         $response = new Desk($client);
 
-        $this->assertEquals(6546, $response->upload(6546545, $request->file));
+        $uploadResponse = file_get_contents(__DIR__ . '/Mock/Desk/upload-response.json');
+        $this->assertEquals($uploadResponse, $response->upload(6546545, $file));
     }
 }

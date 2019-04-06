@@ -4,10 +4,8 @@ namespace DigitalEquation\Teamwork\Tests;
 
 use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkParameterException;
-use DigitalEquation\Teamwork\Exceptions\TeamworkUploadException;
 use DigitalEquation\Teamwork\Services\Tickets;
 use DigitalEquation\Teamwork\Teamwork;
-use Illuminate\Support\Facades\File;
 
 class TeamworkTicketsTest extends TeamworkTestCase
 {
@@ -131,40 +129,5 @@ class TeamworkTicketsTest extends TeamworkTestCase
             'body'       => 'Reply TEST on ticket.',
             'customerId' => 65465,
         ]));
-    }
-
-    /** @test */
-    public function it_should_throw_an_upload_exception_on_post_upload_request()
-    {
-        $this->expectException(TeamworkUploadException::class);
-
-        (new Teamwork)->tickets()->upload(65465, '');
-    }
-
-    /** @test */
-    public function it_should_upload_a_file_and_return_the_attachment_id()
-    {
-        $request = $this->getUploadFileRequest('files', true);
-        $file = $request->file('files')[0];
-
-        $body     = file_get_contents(__DIR__ . '/Mock/Tickets/upload-data.json');
-        $client   = $this->mockClient(200, $body);
-        $response = new Tickets($client);
-
-        $uploadResponse = file_get_contents(__DIR__ . '/Mock/Tickets/upload-response.json');
-        $this->assertEquals($uploadResponse, $response->upload(6546545, $file));
-    }
-
-    /** @test */
-    public function it_should_throw_an_http_exception_on_post_upload_request()
-    {
-        $this->app['config']->set('teamwork.desk.domain', 'undefined');
-
-        $this->expectException(TeamworkHttpException::class);
-
-        $request = $this->getUploadFileRequest('files', true);
-        $file = $request->file('files')[0];
-
-        (new Teamwork)->tickets()->upload(65465, $file);
     }
 }

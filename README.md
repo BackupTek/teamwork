@@ -4,7 +4,7 @@
 [![Build Status](https://img.shields.io/travis/digitalequation/teamwork/master.svg?style=flat-square)](https://travis-ci.org/digitalequation/teamwork)
 [![Quality Score](https://img.shields.io/scrutinizer/g/digitalequation/teamwork.svg?style=flat-square)](https://scrutinizer-ci.com/g/digitalequation/teamwork)
 [![Total Downloads](https://img.shields.io/packagist/dt/digitalequation/teamwork.svg?style=flat-square)](https://packagist.org/packages/digitalequation/teamwork)
-[![License](https://img.shields.io/packagist/l/digitalequation/teamwork.svg?style=flat-square)](https://github.com/digitalequation/php-dump/blob/master/LICENSE.md)
+[![License](https://img.shields.io/packagist/l/digitalequation/teamwork.svg?style=flat-square)](https://github.com/digitalequation/teamwork/blob/master/LICENSE.md)
 
 A PHP Laravel wrapper library for Teamwork Desk, Teamwork Help Docs and Teamwork Tickets API's.
 

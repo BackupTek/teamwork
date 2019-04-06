@@ -83,55 +83,6 @@ class Desk
     }
 
     /**
-     * Upload file to teamwork API
-     *
-     * @param int $userId
-     * @param     $file
-     *
-     * @return int
-     * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
-     * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkUploadException
-     */
-    public function upload($userId, $file): int
-    {
-        if (empty($file)) {
-            throw new TeamworkUploadException('No file provided.');
-        }
-
-        $filename = $file->getClientOriginalName();
-        $path     = sys_get_temp_dir();
-        $temp     = $file->move($path, $filename);
-        $stream   = fopen($temp->getPathName(), 'r');
-
-        try {
-            /** @var Response $response */
-            $response = $this->client->post('upload/attachment', [
-                'multipart' => [
-                    [
-                        'name'     => 'file',
-                        'contents' => $stream,
-                    ], [
-                        'name'     => 'userId',
-                        'contents' => $userId,
-                    ],
-                ],
-            ]);
-
-            /** @var Stream $body */
-            $body     = $response->getBody();
-            $response = json_decode($body->getContents());
-
-            if (!empty($stream)) {
-                File::delete($temp->getPathName());
-            }
-
-            return $response->attachment->id;
-        } catch (ClientException $e) {
-            throw new TeamworkHttpException($e->getMessage(), 400);
-        }
-    }
-
-    /**
      * Return the current client info.
      *
      * @return string
@@ -146,6 +97,64 @@ class Desk
             $body = $response->getBody();
 
             return $body->getContents();
+        } catch (ClientException $e) {
+            throw new TeamworkHttpException($e->getMessage(), 400);
+        }
+    }
+
+    /**
+     * Upload file to teamwork desk.
+     *
+     * @param $userId
+     * @param $file
+     *
+     * @return string
+     * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkUploadException
+     */
+    public function upload($userId, $file): string
+    {
+        if (empty($file)) {
+            throw new TeamworkUploadException('No file provided.', 400);
+        }
+
+        $filename  = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+        $path      = sys_get_temp_dir();
+        $temp      = $file->move($path, $filename);
+        $stream    = fopen($temp->getPathName(), 'r');
+
+        try {
+            /** @var Response $response */
+            $response = $this->client->post('upload/attachment', [
+                'multipart' => [
+                    [
+                        'name'     => 'file',
+                        'contents' => $stream,
+                    ], [
+                        'name'     => 'userId',
+                        'contents' => $userId,
+                    ],
+                ],
+            ]);
+            /** @var Stream $body */
+            $body = $response->getBody();
+            $body = json_decode($body->getContents(), true);
+
+            if (!empty($stream)) {
+                File::delete($temp->getPathName());
+            }
+
+            return json_encode([
+                'id'   => $body['attachment']['id'],
+                'file' => [
+                    'id'        => $body['attachment']['id'],
+                    'url'       => $body['attachment']['downloadURL'],
+                    'extension' => $extension,
+                    'name'      => $body['attachment']['filename'],
+                    'size'      => $body['attachment']['size'],
+                ],
+            ]);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }

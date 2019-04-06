@@ -4,12 +4,10 @@ namespace DigitalEquation\Teamwork\Services;
 
 use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkParameterException;
-use DigitalEquation\Teamwork\Exceptions\TeamworkUploadException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Stream;
-use Illuminate\Support\Facades\File;
 
 class Tickets
 {
@@ -142,64 +140,6 @@ class Tickets
             $body = $response->getBody();
 
             return $body->getContents();
-        } catch (ClientException $e) {
-            throw new TeamworkHttpException($e->getMessage(), 400);
-        }
-    }
-
-    /**
-     * Upload files to teamwork desk.
-     *
-     * @param $userId
-     * @param $file
-     *
-     * @return string
-     * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
-     * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkUploadException
-     */
-    public function upload($userId, $file): string
-    {
-        if (empty($file)) {
-            throw new TeamworkUploadException('No file provided.', 400);
-        }
-
-        $filename  = $file->getClientOriginalName();
-        $extension = $file->getClientOriginalExtension();
-        $path      = sys_get_temp_dir();
-        $temp      = $file->move($path, $filename);
-        $stream    = fopen($temp->getPathName(), 'r');
-
-        try {
-            /** @var Response $response */
-            $response = $this->client->post('upload/attachment', [
-                'multipart' => [
-                    [
-                        'name'     => 'file',
-                        'contents' => $stream,
-                    ], [
-                        'name'     => 'userId',
-                        'contents' => $userId,
-                    ],
-                ],
-            ]);
-            /** @var Stream $body */
-            $body = $response->getBody();
-            $body = json_decode($body->getContents(), true);
-
-            if (!empty($stream)) {
-                File::delete($temp->getPathName());
-            }
-
-            return json_encode([
-                'id'   => $body['attachment']['id'],
-                'file' => [
-                    'id'        => $body['attachment']['id'],
-                    'url'       => $body['attachment']['downloadURL'],
-                    'extension' => $extension,
-                    'name'      => $body['attachment']['filename'],
-                    'size'      => $body['attachment']['size'],
-                ],
-            ]);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }

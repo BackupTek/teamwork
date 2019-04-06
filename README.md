@@ -21,6 +21,38 @@ php artisan teamwork:install
 ```
 This will publish and register the TeamworkServiceProvider and will also generate a config file `config/teamwork.php`.
 
+```php
+return [
+    'desk' => [
+        /*
+        |--------------------------------------------------------------------------
+        | Teamwork Desk Key
+        |--------------------------------------------------------------------------
+        |
+        | The Teamwork Desk API Key can be generated at:
+        | https://your-domain.teamwork.com/desk/#myprofile/apikeys
+        |
+        */
+        'key' => env('TEAMWORK_DESK_KEY'),
+
+        /*
+        |--------------------------------------------------------------------------
+        | Teamwork Desk Domain Name
+        |--------------------------------------------------------------------------
+        |
+        | The domain is the site address you have set on the Teamwork account.
+        | To find the domain name just login to http://teamwork.com.
+        | Then you will see the browser URL changing to:
+        | https://your-domain.teamwork.com/launchpad/welcome
+        |
+        */
+        'domain' => env('TEAMWORK_DESK_DOMAIN'),
+    ],
+];
+```
+
+You can edit this file directly but we recommend to add your settings in the `.env` file.
+
 If you edit the config file and want to restore the defaults run:
 ```bash
 php artisan teamwork:publish
@@ -33,9 +65,24 @@ TEAMWORK_DESK_DOMAIN=--YOUR-TEAMWORK-DESK-DOMAIN--
 ```
 
 ## Usage
+1. Using the `Teamwork` facade.
+2. Using `dependency injection`.
 
-Since we are using Laravel we will inject the `Teamwork` class as a dependency to our `TeamworkController` constructor so we could have access to it on every method:
-``` php
+Example using `facade`:
+```php
+use Teamwork;
+
+try {
+    $response = Teamwork::desk()->me();
+
+    // do something with the response data...
+} catch (\Exception $e) {
+    // do something with the error...
+}
+```
+
+Example using `dependency injection`:
+```php
 <?php
 
 namespace App\Http\Controllers;
@@ -57,16 +104,29 @@ class TeamworkController extends Controller
     {
         $this->teamwork = $teamwork;
     }
-
+    
+    public function getMe()
+    {
+        try {
+            $response = $this->teamwork->desk()->me();
+        
+            // do something with the response data...
+        } catch (\Exception $e) {
+            // do something with the error...
+        }
+    }
+    
     // other methods
 ```
+
+For all of the examples bellow we will use the `Teamwork` facade.
 
 ### Teamwork Desk
 ___
 Get current user data:
 ```php
 try {
-    $response = $this->teamwork->desk()->me();
+    $response = Teamwork::desk()->me();
 
     // do something with the response data...
 } catch (\Exception $e) {
@@ -77,7 +137,7 @@ try {
 Get all Teamwork Desk Inboxes:
 ```php
 try {
-    $response = $this->teamwork->desk()->inboxes();
+    $response = Teamwork::desk()->inboxes();
 
     // do something with the response data...
 } catch (\Exception $e) {
@@ -88,7 +148,7 @@ try {
 Get an inbox by name:
 ```php
 try {
-    $response = $this->teamwork->desk()->inbox('Inbox Name');
+    $response = Teamwork::desk()->inbox('Inbox Name');
 
     // do something with the response data...
 } catch (\Exception $e) {
@@ -105,10 +165,10 @@ public function postUploadAttachment(Request $request)
     }
 
     try {
-        $user = $this->teamwork->desk()->me();
+        $user = Teamwork::desk()->me();
         $user = json_decode($user);
 
-        $response = $this->teamwork->desk()->upload($user->id, $request->file);
+        $response = Teamwork::desk()->upload($user->id, $request->file);
 
         // example response
         [
@@ -134,7 +194,7 @@ ___
 Get ticket priorities:
 ```php
 try {
-    $response = $this->teamwork->tickets()->priorities();
+    $response = Teamwork::tickets()->priorities();
 
     // do something with the response data...
 } catch (\Exception $e) {
@@ -145,7 +205,7 @@ try {
 Get a ticket by id:
 ```php
 try {
-    $response = $this->teamwork->tickets()->ticket($ticketId);
+    $response = Teamwork::tickets()->ticket($ticketId);
 
     // do something with the response data...
 } catch (\Exception $e) {
@@ -156,7 +216,7 @@ try {
 Get a list of tickets for a customer/user:
 ```php
 try {
-    $response = $this->teamwork->tickets()->customer($customerId);
+    $response = Teamwork::tickets()->customer($customerId);
 
     // do something with the response data...
 } catch (\Exception $e) {
@@ -183,7 +243,7 @@ try {
         'message'             => 'The ticket body...',
     ];
 
-    $response = $this->teamwork->tickets()->post($data);
+    $response = Teamwork::tickets()->post($data);
 
     // do something with the response data...
 } catch (\Exception $e) {
@@ -200,7 +260,7 @@ try {
         'customerId' => 65465,
     ];
 
-    $response = $this->teamwork->tickets()->reply($data);
+    $response = Teamwork::tickets()->reply($data);
     // do something with the response data...
 } catch (\Exception $e) {
     // do something with the error...
@@ -212,7 +272,7 @@ ___
 Get Help Docs list of sites:
 ```php
 try {
-    $response = $this->teamwork->helpDesk()->getSites();
+    $response = Teamwork::helpDesk()->getSites();
     // do something with the response data...
 } catch (\Exception $e) {
     // do something with the error...
@@ -222,7 +282,7 @@ try {
 Get a Help Docs site by id:
 ```php
 try {
-    $response = $this->teamwork->helpDesk()->getSite($siteId);
+    $response = Teamwork::helpDesk()->getSite($siteId);
     // do something with the response data...
 } catch (\Exception $e) {
     // do something with the error...
@@ -232,7 +292,7 @@ try {
 Get all categories within a site:
 ```php
 try {
-    $response = $this->teamwork->helpDesk()->getSitesCategories($siteId);
+    $response = Teamwork::helpDesk()->getSitesCategories($siteId);
     // do something with the response data...
 } catch (\Exception $e) {
     // do something with the error...
@@ -242,7 +302,7 @@ try {
 Get articles within a category:
 ```php
 try {
-    $response = $this->teamwork->helpDesk()->getCategoryArticles($categoryId, $pageId);
+    $response = Teamwork::helpDesk()->getCategoryArticles($categoryId, $pageId);
     // do something with the response data...
 } catch (\Exception $e) {
     // do something with the error...
@@ -252,7 +312,7 @@ try {
 Get a list of site articles:
 ```php
 try {
-    $response = $this->teamwork->helpDesk()->getSiteArticles($siteId, $pageId);
+    $response = Teamwork::helpDesk()->getSiteArticles($siteId, $pageId);
     // do something with the response data...
 } catch (\Exception $e) {
     // do something with the error...
@@ -262,7 +322,7 @@ try {
 Get a single article:
 ```php
 try {
-    $response = $this->teamwork->helpDesk()->getArticle($articleId);
+    $response = Teamwork::helpDesk()->getArticle($articleId);
     // do something with the response data...
 } catch (\Exception $e) {
     // do something with the error...
@@ -272,7 +332,7 @@ try {
 Get multiple articles by id's:
 ```php
 try {
-    $response = $this->teamwork->helpDesk()->getArticles($articleIDs);
+    $response = Teamwork::helpDesk()->getArticles($articleIDs);
     // do something with the response data...
 } catch (\Exception $e) {
     // do something with the error...

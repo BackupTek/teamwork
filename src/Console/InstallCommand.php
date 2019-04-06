@@ -53,20 +53,18 @@ class InstallCommand extends Command
 
 		$appConfig = file_get_contents(config_path('app.php'));
 
-		if (Str::contains($appConfig, $namespace . '\\Providers\TeamworkServiceProvider::class')) {
+		if (Str::contains($appConfig, $namespace . '\\DigitalEquation\Teamwork\TeamworkServiceProvider::class')) {
 			return;
 		}
 
 		file_put_contents(config_path('app.php'), str_replace(
-			"{$namespace}\\Providers\EventServiceProvider::class," . PHP_EOL,
-			"{$namespace}\\Providers\EventServiceProvider::class," . PHP_EOL . "        {$namespace}\Providers\TeamworkServiceProvider::class," . PHP_EOL,
+			"/*
+         * Package Service Providers...
+         */" . PHP_EOL,
+			"/*
+         * Package Service Providers...
+         */" . PHP_EOL . "        DigitalEquation\Teamwork\TeamworkServiceProvider::class," . PHP_EOL,
 			$appConfig
-		));
-
-		file_put_contents(app_path('Providers/TeamworkServiceProvider.php'), str_replace(
-			"namespace App\Providers;",
-			"namespace {$namespace}\Providers;",
-			file_get_contents(app_path('Providers/TeamworkServiceProvider.php'))
 		));
 	}
 }

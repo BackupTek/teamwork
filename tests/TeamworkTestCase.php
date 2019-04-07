@@ -2,15 +2,15 @@
 
 namespace DigitalEquation\Teamwork\Tests;
 
-use DigitalEquation\Teamwork\Teamwork;
 use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Orchestra\Testbench\TestCase;
+use GuzzleHttp\Handler\MockHandler;
+use DigitalEquation\Teamwork\Teamwork;
+use Illuminate\Support\Facades\Storage;
 
 class TeamworkTestCase extends TestCase
 {
@@ -37,7 +37,7 @@ class TeamworkTestCase extends TestCase
         $app['config']->set('teamwork.desk.domain', 'somedomain');
         $app['config']->set('teamwork.desk.key', '04983o4krjwlkhoirtht983uytkjhgkjfh');
 
-        $this->app      = $app;
+        $this->app = $app;
         $this->teamwork = new Teamwork();
     }
 
@@ -85,7 +85,7 @@ class TeamworkTestCase extends TestCase
      */
     protected function mockClient($status, $body)
     {
-        $mock    = new MockHandler([new Response($status, [], $body)]);
+        $mock = new MockHandler([new Response($status, [], $body)]);
         $handler = HandlerStack::create($mock);
 
         return new Client(['handler' => $handler]);

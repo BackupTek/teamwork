@@ -2,10 +2,10 @@
 
 namespace DigitalEquation\Teamwork;
 
-use DigitalEquation\Teamwork\Services\Desk;
-use DigitalEquation\Teamwork\Services\HelpDocs;
-use DigitalEquation\Teamwork\Services\Tickets;
 use GuzzleHttp\Client;
+use DigitalEquation\Teamwork\Services\Desk;
+use DigitalEquation\Teamwork\Services\Tickets;
+use DigitalEquation\Teamwork\Services\HelpDocs;
 
 class Teamwork
 {
@@ -26,7 +26,7 @@ class Teamwork
     }
 
     /**
-     * Teamwork Desk
+     * Teamwork Desk.
      *
      * @return Desk
      */
@@ -36,7 +36,7 @@ class Teamwork
     }
 
     /**
-     * Teamwork HelpDocs
+     * Teamwork HelpDocs.
      *
      * @return HelpDocs
      */
@@ -46,7 +46,7 @@ class Teamwork
     }
 
     /**
-     * Teamwork Tickets
+     * Teamwork Tickets.
      *
      * @return Tickets
      */

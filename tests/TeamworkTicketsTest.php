@@ -2,10 +2,10 @@
 
 namespace DigitalEquation\Teamwork\Tests;
 
+use DigitalEquation\Teamwork\Teamwork;
+use DigitalEquation\Teamwork\Services\Tickets;
 use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkParameterException;
-use DigitalEquation\Teamwork\Services\Tickets;
-use DigitalEquation\Teamwork\Teamwork;
 
 class TeamworkTicketsTest extends TeamworkTestCase
 {
@@ -21,8 +21,8 @@ class TeamworkTicketsTest extends TeamworkTestCase
     /** @test */
     public function it_should_return_all_priorities()
     {
-        $body     = file_get_contents(__DIR__ . '/Mock/Tickets/priorities-response.json');
-        $client   = $this->mockClient(200, $body);
+        $body = file_get_contents(__DIR__.'/Mock/Tickets/priorities-response.json');
+        $client = $this->mockClient(200, $body);
         $response = new Tickets($client);
 
         $this->assertEquals($body, $response->priorities());
@@ -40,8 +40,8 @@ class TeamworkTicketsTest extends TeamworkTestCase
     /** @test */
     public function it_should_return_a_list_of_customer_tickets()
     {
-        $body     = file_get_contents(__DIR__ . '/Mock/Tickets/customer-tickets-response.json');
-        $client   = $this->mockClient(200, $body);
+        $body = file_get_contents(__DIR__.'/Mock/Tickets/customer-tickets-response.json');
+        $client = $this->mockClient(200, $body);
         $response = new Tickets($client);
 
         $this->assertEquals($body, $response->customer(529245));
@@ -59,8 +59,8 @@ class TeamworkTicketsTest extends TeamworkTestCase
     /** @test */
     public function it_should_return_a_ticket()
     {
-        $body     = file_get_contents(__DIR__ . '/Mock/Tickets/ticket-response.json');
-        $client   = $this->mockClient(200, $body);
+        $body = file_get_contents(__DIR__.'/Mock/Tickets/ticket-response.json');
+        $client = $this->mockClient(200, $body);
         $response = new Tickets($client);
 
         $this->assertEquals($body, $response->ticket(6546545));
@@ -94,8 +94,8 @@ class TeamworkTicketsTest extends TeamworkTestCase
             'message'             => 'Ths is an API test so please ignore this ticket.',
         ];
 
-        $body     = file_get_contents(__DIR__ . '/Mock/Tickets/create-response.json');
-        $client   = $this->mockClient(200, $body);
+        $body = file_get_contents(__DIR__.'/Mock/Tickets/create-response.json');
+        $client = $this->mockClient(200, $body);
         $response = new Tickets($client);
 
         $this->assertEquals($body, $response->post($data));
@@ -120,8 +120,8 @@ class TeamworkTicketsTest extends TeamworkTestCase
     /** @test */
     public function it_should_post_a_reply_and_return_back_the_ticket()
     {
-        $body     = file_get_contents(__DIR__ . '/Mock/Tickets/ticket-reply-response.json');
-        $client   = $this->mockClient(200, $body);
+        $body = file_get_contents(__DIR__.'/Mock/Tickets/ticket-reply-response.json');
+        $client = $this->mockClient(200, $body);
         $response = new Tickets($client);
 
         $this->assertEquals($body, $response->reply([

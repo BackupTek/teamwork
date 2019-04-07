@@ -84,14 +84,8 @@ use DigitalEquation\Teamwork\Teamwork;
 
 class TeamworkController extends Controller
 {
-    /** @var \DigitalEquation\Teamwork */
     protected $teamwork;
 
-    /**
-     * TestController constructor.
-     *
-     * @param Teamwork $teamwork
-     */
     public function __construct(Teamwork $teamwork)
     {
         $this->teamwork = $teamwork;
@@ -101,7 +95,8 @@ class TeamworkController extends Controller
     {
         try {
             $response = $this->teamwork->desk()->me();
-        
+            $response = json_decode($response, true);
+            
             // do something with the response data...
         } catch (\Exception $e) {
             // do something with the error...
@@ -111,7 +106,8 @@ class TeamworkController extends Controller
     // other methods
 ```
 
-For all of the examples listed bellow we will use the `Teamwork` facade.
+For all of the examples listed bellow we will use the `Teamwork` facade.  
+**Note:** All responses are in JSON format.
 
 ### Teamwork Desk
 ___
@@ -132,35 +128,25 @@ $response = Teamwork::desk()->inbox('Inbox Name');
 
 Upload a file:
 ```php
-public function postUploadAttachment(Request $request)
-{
-    if (!$request->has('file')) {
-        // throw an error or something...
-    }
+$teamworkUser = Teamwork::desk()->me();
+$teamworkUser = json_decode($user);
 
-    try {
-        $user = Teamwork::desk()->me();
-        $user = json_decode($user);
+$response = Teamwork::desk()->upload($teamworkUser->id, $request->file);
+$response = json_decode($response, true);
+```
 
-        $response = Teamwork::desk()->upload($user->id, $request->file);
-
-        // example response
-        [
-            'id' => 1312, // the uploaded file id on Teamwork
-            'file' => [
-                'id' => 1312,
-                'url'       => 'http://...', // the URL of the image
-                'extension' => 'jpg',
-                'name'      => 'Some File Name',
-                'size'      => '42342', // the image size in kb
-            ]
-        ]
-
-        // do something with the response data...
-    } catch (\Exception $e) {
-        // do something with the error...
-    }
-}
+Example response for file upload:
+```php
+[
+    'id' => 1312, // the uploaded file id on Teamwork
+    'file' => [
+        'id' => 1312,
+        'url'       => 'http://...', // the URL of the image
+        'extension' => 'jpg',
+        'name'      => 'Some File Name',
+        'size'      => '42342', // the image size in kb
+    ]
+]
 ```
 
 **TIP:** Surround your `Teamwork` calls in `try-catch` blocks to capture any possible thrown exception. 

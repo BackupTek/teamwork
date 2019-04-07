@@ -1,4 +1,8 @@
 preset: laravel
 
+enable:
+  - align_equals
+
 disabled:
   - single_class_element_per_statement
+  - self_accessor

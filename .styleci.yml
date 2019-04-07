@@ -1,6 +1,6 @@
 preset: laravel
 
-enable:
+enabled:
   - align_equals
 
 disabled:

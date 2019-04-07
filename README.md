@@ -138,14 +138,11 @@ $response = json_decode($response, true);
 Example response for file upload:
 ```php
 [
-    'id' => 1312, // the uploaded file id on Teamwork
-    'file' => [
-        'id' => 1312,
-        'url'       => 'http://...', // the URL of the image
-        'extension' => 'jpg',
-        'name'      => 'Some File Name',
-        'size'      => '42342', // the image size in kb
-    ]
+    'id'        => 1312, // the uploaded file id on Teamwork
+    'url'       => 'http://...', // the URL of the image
+    'extension' => 'jpg',
+    'name'      => 'Some File Name',
+    'size'     => '42342', // the image size in kb
 ]
 ```
 

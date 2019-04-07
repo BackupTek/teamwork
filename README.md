@@ -142,7 +142,7 @@ Example response for file upload:
     'url'       => 'http://...', // the URL of the image
     'extension' => 'jpg',
     'name'      => 'Some File Name',
-    'size'     => '42342', // the image size in kb
+    'size'      => '42342', // the image size in kb
 ]
 ```
 

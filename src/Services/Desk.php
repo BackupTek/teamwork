@@ -43,7 +43,7 @@ class Desk
             /** @var Response $response */
             $response = $this->client->get('inboxes.json');
             /** @var Stream $body */
-            $body = $response->getBody();
+            $body    = $response->getBody();
             $inboxes = json_decode($body->getContents(), true);
 
             $inbox = collect($inboxes['inboxes'])->first(
@@ -118,11 +118,11 @@ class Desk
             throw new TeamworkUploadException('No file provided.', 400);
         }
 
-        $filename = $file->getClientOriginalName();
+        $filename  = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
-        $path = sys_get_temp_dir();
-        $temp = $file->move($path, $filename);
-        $stream = fopen($temp->getPathName(), 'r');
+        $path      = sys_get_temp_dir();
+        $temp      = $file->move($path, $filename);
+        $stream    = fopen($temp->getPathName(), 'r');
 
         try {
             /** @var Response $response */

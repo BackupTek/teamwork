@@ -37,7 +37,7 @@ class TeamworkTestCase extends TestCase
         $app['config']->set('teamwork.desk.domain', 'somedomain');
         $app['config']->set('teamwork.desk.key', '04983o4krjwlkhoirtht983uytkjhgkjfh');
 
-        $this->app = $app;
+        $this->app      = $app;
         $this->teamwork = new Teamwork();
     }
 
@@ -85,7 +85,7 @@ class TeamworkTestCase extends TestCase
      */
     protected function mockClient($status, $body)
     {
-        $mock = new MockHandler([new Response($status, [], $body)]);
+        $mock    = new MockHandler([new Response($status, [], $body)]);
         $handler = HandlerStack::create($mock);
 
         return new Client(['handler' => $handler]);

@@ -146,14 +146,11 @@ class Desk
             }
 
             return json_encode([
-                'id'   => $body['attachment']['id'],
-                'file' => [
-                    'id'        => $body['attachment']['id'],
-                    'url'       => $body['attachment']['downloadURL'],
-                    'extension' => $extension,
-                    'name'      => $body['attachment']['filename'],
-                    'size'      => $body['attachment']['size'],
-                ],
+                'id'        => $body['attachment']['id'],
+                'url'       => $body['attachment']['downloadURL'],
+                'extension' => $extension,
+                'name'      => $body['attachment']['filename'],
+                'size'      => $body['attachment']['size'],
             ]);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);

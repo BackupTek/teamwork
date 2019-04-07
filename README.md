@@ -2,6 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/digitalequation/teamwork.svg?style=flat-square)](https://packagist.org/packages/digitalequation/teamwork)
 [![Build Status](https://img.shields.io/travis/digitalequation/teamwork/master.svg?style=flat-square)](https://travis-ci.org/digitalequation/teamwork)
+[![StyleCI](https://github.styleci.io/repos/179847016/shield?branch=master)](https://github.styleci.io/repos/179847016)
 [![Quality Score](https://img.shields.io/scrutinizer/g/digitalequation/teamwork.svg?style=flat-square)](https://scrutinizer-ci.com/g/digitalequation/teamwork)
 [![Total Downloads](https://img.shields.io/packagist/dt/digitalequation/teamwork.svg?style=flat-square)](https://packagist.org/packages/digitalequation/teamwork)
 [![License](https://img.shields.io/packagist/l/digitalequation/teamwork.svg?style=flat-square)](https://github.com/digitalequation/teamwork/blob/master/LICENSE.md)

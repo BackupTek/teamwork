@@ -6,5 +6,3 @@ enabled:
 disabled:
   - single_class_element_per_statement
   - self_accessor
-  - align_equals_minimal
-  - unalign_equals

@@ -22,8 +22,8 @@ class TeamworkDeskTest extends TeamworkTestCase
     /** @test */
     public function it_should_return_the_logged_in_user()
     {
-        $body = file_get_contents(__DIR__.'/Mock/Me/response-body.json');
-        $client = $this->mockClient(200, $body);
+        $body     = file_get_contents(__DIR__.'/Mock/Me/response-body.json');
+        $client   = $this->mockClient(200, $body);
         $response = new Desk($client);
 
         $this->assertEquals($body, $response->me());
@@ -41,8 +41,8 @@ class TeamworkDeskTest extends TeamworkTestCase
     /** @test */
     public function it_should_return_an_array_of_inboxes()
     {
-        $body = file_get_contents(__DIR__.'/Mock/Desk/inboxes-response.json');
-        $client = $this->mockClient(200, $body);
+        $body     = file_get_contents(__DIR__.'/Mock/Desk/inboxes-response.json');
+        $client   = $this->mockClient(200, $body);
         $response = new Desk($client);
 
         $this->assertEquals($body, $response->inboxes());
@@ -53,8 +53,8 @@ class TeamworkDeskTest extends TeamworkTestCase
     {
         $this->expectException(TeamworkInboxException::class);
 
-        $body = file_get_contents(__DIR__.'/Mock/Desk/inboxes-response.json');
-        $client = $this->mockClient(200, $body);
+        $body     = file_get_contents(__DIR__.'/Mock/Desk/inboxes-response.json');
+        $client   = $this->mockClient(200, $body);
         $response = new Desk($client);
         $response->inbox('undefined-inbox-name');
     }
@@ -71,8 +71,8 @@ class TeamworkDeskTest extends TeamworkTestCase
     /** @test */
     public function it_should_return_the_inbox_data()
     {
-        $body = file_get_contents(__DIR__.'/Mock/Desk/inboxes-response.json');
-        $client = $this->mockClient(200, $body);
+        $body     = file_get_contents(__DIR__.'/Mock/Desk/inboxes-response.json');
+        $client   = $this->mockClient(200, $body);
         $response = new Desk($client);
 
         $inboxResponse = file_get_contents(__DIR__.'/Mock/Desk/inbox-response.json');
@@ -102,10 +102,10 @@ class TeamworkDeskTest extends TeamworkTestCase
     public function it_should_upload_a_file_and_return_the_attachment_id()
     {
         $request = $this->getUploadFileRequest('files', true);
-        $file = $request->file('files')[0];
+        $file    = $request->file('files')[0];
 
-        $body = file_get_contents(__DIR__.'/Mock/Desk/upload-data.json');
-        $client = $this->mockClient(200, $body);
+        $body     = file_get_contents(__DIR__.'/Mock/Desk/upload-data.json');
+        $client   = $this->mockClient(200, $body);
         $response = new Desk($client);
 
         $uploadResponse = file_get_contents(__DIR__.'/Mock/Desk/upload-response.json');

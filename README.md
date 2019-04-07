@@ -6,8 +6,8 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/digitalequation/teamwork.svg?style=flat-square)](https://packagist.org/packages/digitalequation/teamwork)
 [![License](https://img.shields.io/packagist/l/digitalequation/teamwork.svg?style=flat-square)](https://github.com/digitalequation/teamwork/blob/master/LICENSE.md)
 
-A PHP Laravel wrapper library for Teamwork Desk, Teamwork Help Docs and Teamwork Tickets API's.
-
+A PHP Laravel wrapper library for Teamwork Desk, Teamwork Help Docs and Teamwork Tickets API's.  
+This package was built for our internal projects and may not be the right one for you but you are free to use it if you like.
 ## Installation
 
 You can install the package via composer:

@@ -2,13 +2,13 @@
 
 namespace DigitalEquation\Teamwork\Services;
 
-use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Pool as GuzzlePool;
-use GuzzleHttp\Psr7\Request as GuzzleRequest;
-use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Stream;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Pool as GuzzlePool;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Request as GuzzleRequest;
+use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
 
 class HelpDocs
 {
@@ -50,7 +50,7 @@ class HelpDocs
     /**
      * Get Helpdocs site.
      *
-     * @param integer $siteID
+     * @param int $siteID
      *
      * @return string
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
@@ -72,8 +72,8 @@ class HelpDocs
     /**
      * Get articles within a category.
      *
-     * @param integer $categoryID
-     * @param integer $page
+     * @param int $categoryID
+     * @param int $page
      *
      * @return string
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
@@ -97,8 +97,8 @@ class HelpDocs
     /**
      * Get articles within a site.
      *
-     * @param integer $siteID
-     * @param integer $page
+     * @param int $siteID
+     * @param int $page
      *
      * @return string
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
@@ -122,7 +122,7 @@ class HelpDocs
     /**
      * Get article by id.
      *
-     * @param integer $articleID
+     * @param int $articleID
      *
      * @return string
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
@@ -142,7 +142,7 @@ class HelpDocs
     }
 
     /**
-     * Get articles (in bulk)
+     * Get articles (in bulk).
      *
      * @param $articleIDs
      *
@@ -174,7 +174,7 @@ class HelpDocs
     /**
      * Get categories within a site.
      *
-     * @param integer $siteID
+     * @param int $siteID
      *
      * @return string
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException

@@ -2,14 +2,14 @@
 
 namespace DigitalEquation\Teamwork\Services;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Stream;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Facades\File;
+use GuzzleHttp\Exception\ClientException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkInboxException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkUploadException;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7\Stream;
-use Illuminate\Support\Facades\File;
 
 class Desk
 {
@@ -43,7 +43,7 @@ class Desk
             /** @var Response $response */
             $response = $this->client->get('inboxes.json');
             /** @var Stream $body */
-            $body    = $response->getBody();
+            $body = $response->getBody();
             $inboxes = json_decode($body->getContents(), true);
 
             $inbox = collect($inboxes['inboxes'])->first(
@@ -52,7 +52,7 @@ class Desk
                 }
             );
 
-            if (!$inbox) {
+            if (! $inbox) {
                 throw new TeamworkInboxException("No inbox found with the name: $name!", 400);
             }
 
@@ -118,11 +118,11 @@ class Desk
             throw new TeamworkUploadException('No file provided.', 400);
         }
 
-        $filename  = $file->getClientOriginalName();
+        $filename = $file->getClientOriginalName();
         $extension = $file->getClientOriginalExtension();
-        $path      = sys_get_temp_dir();
-        $temp      = $file->move($path, $filename);
-        $stream    = fopen($temp->getPathName(), 'r');
+        $path = sys_get_temp_dir();
+        $temp = $file->move($path, $filename);
+        $stream = fopen($temp->getPathName(), 'r');
 
         try {
             /** @var Response $response */
@@ -141,7 +141,7 @@ class Desk
             $body = $response->getBody();
             $body = json_decode($body->getContents(), true);
 
-            if (!empty($stream)) {
+            if (! empty($stream)) {
                 File::delete($temp->getPathName());
             }
 

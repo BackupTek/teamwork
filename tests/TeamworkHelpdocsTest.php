@@ -24,7 +24,7 @@ class TeamworkHelpdocsTest extends TeamworkTestCase
         $client   = $this->mockClient(200, $body);
         $response = new HelpDocs($client);
 
-        $this->assertEquals($body, $response->getSites());
+        $this->assertEquals($body, json_encode($response->getSites()));
     }
 
     /** @test */
@@ -43,7 +43,7 @@ class TeamworkHelpdocsTest extends TeamworkTestCase
         $client   = $this->mockClient(200, $body);
         $response = new HelpDocs($client);
 
-        $this->assertEquals($body, $response->getSite(546));
+        $this->assertEquals($body, json_encode($response->getSite(546)));
     }
 
     /** @test */
@@ -62,7 +62,7 @@ class TeamworkHelpdocsTest extends TeamworkTestCase
         $client   = $this->mockClient(200, $body);
         $response = new HelpDocs($client);
 
-        $this->assertEquals($body, $response->getSiteCategories(546));
+        $this->assertEquals($body, json_encode($response->getSiteCategories(546)));
     }
 
     /** @test */
@@ -81,7 +81,7 @@ class TeamworkHelpdocsTest extends TeamworkTestCase
         $client   = $this->mockClient(200, $body);
         $response = new HelpDocs($client);
 
-        $this->assertEquals($body, $response->getSiteArticles(546));
+        $this->assertEquals($body, json_encode($response->getSiteArticles(546)));
     }
 
     /** @test */
@@ -100,7 +100,7 @@ class TeamworkHelpdocsTest extends TeamworkTestCase
         $client   = $this->mockClient(200, $body);
         $response = new HelpDocs($client);
 
-        $this->assertEquals($body, $response->getArticle(546));
+        $this->assertEquals($body, json_encode($response->getArticle(546)));
     }
 
     /** @test */
@@ -111,7 +111,7 @@ class TeamworkHelpdocsTest extends TeamworkTestCase
         $response = new HelpDocs($client);
 
         $body = json_encode([json_decode($body)->article]);
-        $this->assertEquals($body, $response->getArticles([3342]));
+        $this->assertEquals($body, json_encode($response->getArticles([3342])));
     }
 
     /** @test */
@@ -130,6 +130,6 @@ class TeamworkHelpdocsTest extends TeamworkTestCase
         $client   = $this->mockClient(200, $body);
         $response = new HelpDocs($client);
 
-        $this->assertEquals($body, $response->getCategoryArticles(3342));
+        $this->assertEquals($body, json_encode($response->getCategoryArticles(3342)));
     }
 }

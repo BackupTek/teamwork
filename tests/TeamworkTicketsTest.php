@@ -25,7 +25,7 @@ class TeamworkTicketsTest extends TeamworkTestCase
         $client   = $this->mockClient(200, $body);
         $response = new Tickets($client);
 
-        $this->assertEquals($body, $response->priorities());
+        $this->assertEquals($body, json_encode($response->priorities()));
     }
 
     /** @test */
@@ -44,7 +44,7 @@ class TeamworkTicketsTest extends TeamworkTestCase
         $client   = $this->mockClient(200, $body);
         $response = new Tickets($client);
 
-        $this->assertEquals($body, $response->customer(529245));
+        $this->assertEquals($body, json_encode($response->customer(529245)));
     }
 
     /** @test */
@@ -63,7 +63,7 @@ class TeamworkTicketsTest extends TeamworkTestCase
         $client   = $this->mockClient(200, $body);
         $response = new Tickets($client);
 
-        $this->assertEquals($body, $response->ticket(6546545));
+        $this->assertEquals($body, json_encode($response->ticket(6546545)));
     }
 
     /** @test */
@@ -98,7 +98,7 @@ class TeamworkTicketsTest extends TeamworkTestCase
         $client   = $this->mockClient(200, $body);
         $response = new Tickets($client);
 
-        $this->assertEquals($body, $response->post($data));
+        $this->assertEquals($body, json_encode($response->post($data)));
     }
 
     /** @test */
@@ -124,10 +124,10 @@ class TeamworkTicketsTest extends TeamworkTestCase
         $client   = $this->mockClient(200, $body);
         $response = new Tickets($client);
 
-        $this->assertEquals($body, $response->reply([
+        $this->assertEquals($body, json_encode($response->reply([
             'ticketId'   => 2201568,
             'body'       => 'Reply TEST on ticket.',
             'customerId' => 65465,
-        ]));
+        ])));
     }
 }

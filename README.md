@@ -96,7 +96,6 @@ class TeamworkController extends Controller
     {
         try {
             $response = $this->teamwork->desk()->me();
-            $response = json_decode($response, true);
             
             // do something with the response data...
         } catch (\Exception $e) {
@@ -107,8 +106,7 @@ class TeamworkController extends Controller
     // other methods
 ```
 
-For all of the examples listed bellow we will use the `Teamwork` facade.  
-**Note:** All responses are in JSON format.
+For all of the examples listed bellow we will use the `Teamwork` facade.
 
 ### Teamwork Desk
 ___
@@ -130,10 +128,8 @@ $response = Teamwork::desk()->inbox('Inbox Name');
 Upload a file:
 ```php
 $teamworkUser = Teamwork::desk()->me();
-$teamworkUser = json_decode($user);
 
-$response = Teamwork::desk()->upload($teamworkUser->id, $request->file);
-$response = json_decode($response, true);
+$response = Teamwork::desk()->upload($teamworkUser['id'], $request->file);
 ```
 
 Example response for file upload:

@@ -33,11 +33,11 @@ class Desk
      *
      * @param string $name
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkInboxException
      */
-    public function inbox($name): string
+    public function inbox($name): array
     {
         try {
             /** @var Response $response */
@@ -56,7 +56,7 @@ class Desk
                 throw new TeamworkInboxException("No inbox found with the name: $name!", 400);
             }
 
-            return json_encode($inbox);
+            return $inbox;
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -65,10 +65,10 @@ class Desk
     /**
      * Get teamwork desk inboxes.
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function inboxes(): string
+    public function inboxes(): array
     {
         try {
             /** @var Response $response */
@@ -76,7 +76,7 @@ class Desk
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -85,10 +85,10 @@ class Desk
     /**
      * Return the current client info.
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function me(): string
+    public function me(): array
     {
         try {
             /** @var Response $response */
@@ -96,7 +96,7 @@ class Desk
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -108,11 +108,11 @@ class Desk
      * @param $userId
      * @param $file
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkUploadException
      */
-    public function upload($userId, $file): string
+    public function upload($userId, $file): array
     {
         if (empty($file)) {
             throw new TeamworkUploadException('No file provided.', 400);
@@ -145,13 +145,13 @@ class Desk
                 File::delete($temp->getPathName());
             }
 
-            return json_encode([
+            return [
                 'id'        => $body['attachment']['id'],
                 'url'       => $body['attachment']['downloadURL'],
                 'extension' => $extension,
                 'name'      => $body['attachment']['filename'],
                 'size'      => $body['attachment']['size'],
-            ]);
+            ];
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }

@@ -29,10 +29,10 @@ class Tickets
     /**
      * Get tickets priorities.
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function priorities(): string
+    public function priorities(): array
     {
         try {
             /** @var Response $response */
@@ -40,7 +40,7 @@ class Tickets
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -51,10 +51,10 @@ class Tickets
      *
      * @param int $customerId
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function customer($customerId): string
+    public function customer($customerId): array
     {
         try {
             /** @var Response $response */
@@ -62,7 +62,7 @@ class Tickets
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -73,10 +73,10 @@ class Tickets
      *
      * @param array $data
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function post($data): string
+    public function post($data): array
     {
         try {
             /** @var Response $response */
@@ -87,7 +87,7 @@ class Tickets
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -98,11 +98,11 @@ class Tickets
      *
      * @param array $data
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkParameterException
      */
-    public function reply(array $data): string
+    public function reply(array $data): array
     {
         if (empty($data['ticketId'])) {
             throw new TeamworkParameterException('The `reply` method expects the passed array param to contain `ticketId`', 400);
@@ -117,7 +117,7 @@ class Tickets
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage());
         }
@@ -128,10 +128,10 @@ class Tickets
      *
      * @param int $ticketId
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function ticket($ticketId): string
+    public function ticket($ticketId): array
     {
         try {
             /** @var Response $response */
@@ -139,7 +139,7 @@ class Tickets
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }

@@ -30,10 +30,10 @@ class HelpDocs
     /**
      * Get HelpDocs sites.
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function getSites(): string
+    public function getSites(): array
     {
         try {
             /** @var Response $response */
@@ -41,7 +41,7 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -52,10 +52,10 @@ class HelpDocs
      *
      * @param int $siteID
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function getSite($siteID): string
+    public function getSite($siteID): array
     {
         try {
             /** @var Response $response */
@@ -63,7 +63,7 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -75,10 +75,10 @@ class HelpDocs
      * @param int $categoryID
      * @param int $page
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function getCategoryArticles($categoryID, $page = 1): string
+    public function getCategoryArticles($categoryID, $page = 1): array
     {
         try {
             /** @var Response $response */
@@ -88,7 +88,7 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -100,10 +100,10 @@ class HelpDocs
      * @param int $siteID
      * @param int $page
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function getSiteArticles($siteID, $page = 1): string
+    public function getSiteArticles($siteID, $page = 1): array
     {
         try {
             /** @var Response $response */
@@ -113,7 +113,7 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -124,10 +124,10 @@ class HelpDocs
      *
      * @param int $articleID
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function getArticle($articleID): string
+    public function getArticle($articleID): array
     {
         try {
             /** @var Response $response */
@@ -135,7 +135,7 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -146,9 +146,9 @@ class HelpDocs
      *
      * @param $articleIDs
      *
-     * @return string
+     * @return array
      */
-    public function getArticles($articleIDs): string
+    public function getArticles($articleIDs): array
     {
         $articles = [];
 
@@ -168,7 +168,7 @@ class HelpDocs
         $promise = $pool->promise();
         $promise->wait();
 
-        return json_encode($articles);
+        return $articles;
     }
 
     /**
@@ -176,10 +176,10 @@ class HelpDocs
      *
      * @param int $siteID
      *
-     * @return string
+     * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      */
-    public function getSiteCategories($siteID): string
+    public function getSiteCategories($siteID): array
     {
         try {
             /** @var Response $response */
@@ -187,7 +187,7 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return $body->getContents();
+            return json_decode($body->getContents(), true);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }

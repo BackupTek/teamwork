@@ -2,6 +2,9 @@
 
 All notable changes to `teamwork` will be documented in this file
 
+## 1.1.0 - 2019-04-08
+- changed responses from JSON to array
+
 ## 1.0.3 - 2019-04-07
 - fixed upload test
 

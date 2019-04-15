@@ -4,6 +4,7 @@ All notable changes to `teamwork` will be documented in this file
 
 ## 1.1.1 - 2019-04-15
 - downgrade illuminate/support version to 5.7
+- downgrate orchestra/testbench version to 3.7
 
 ## 1.1.0 - 2019-04-08
 - changed responses from JSON to array

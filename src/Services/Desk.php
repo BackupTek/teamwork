@@ -114,8 +114,8 @@ class Desk
     {
         try {
             /** @var Response $response */
-            $response = $this->client->post('customers/' . $data['customerId'] . '.json', [
-                'form_params' => $data,
+            $response = $this->client->put('customers/' . $data['customerId'] . '.json', [
+                'json' => $data,
             ]);
 
             /** @var Stream $body */

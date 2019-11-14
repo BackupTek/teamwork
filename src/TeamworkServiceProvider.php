@@ -2,9 +2,9 @@
 
 namespace DigitalEquation\Teamwork;
 
-use Illuminate\Support\ServiceProvider;
 use DigitalEquation\Teamwork\Console\InstallCommand;
 use DigitalEquation\Teamwork\Console\PublishCommand;
+use Illuminate\Support\ServiceProvider;
 
 class TeamworkServiceProvider extends ServiceProvider
 {

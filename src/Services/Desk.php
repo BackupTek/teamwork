@@ -103,6 +103,31 @@ class Desk
     }
 
     /**
+     * Update the customer, based on customerId.
+     *
+     * @param array $data = ['customerId', 'email', 'firstName', 'lastName', 'phone', 'mobile'];
+     *
+     * @return array
+     * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     */
+    public function postCustomer($data): array
+    {
+        try {
+            /** @var Response $response */
+            $response = $this->client->post('customers/' . $data['customerId'] . '.json', [
+                'form_params' => $data,
+            ]);
+
+            /** @var Stream $body */
+            $body = $response->getBody();
+
+            return json_decode($body->getContents(), true);
+        } catch (ClientException $e) {
+            throw new TeamworkHttpException($e->getMessage(), 400);
+        }
+    }
+
+    /**
      * Upload file to teamwork desk.
      *
      * @param $userId

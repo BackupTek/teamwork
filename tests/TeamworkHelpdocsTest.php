@@ -2,9 +2,9 @@
 
 namespace DigitalEquation\Teamwork\Tests;
 
-use DigitalEquation\Teamwork\Teamwork;
-use DigitalEquation\Teamwork\Services\HelpDocs;
 use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
+use DigitalEquation\Teamwork\Services\HelpDocs;
+use DigitalEquation\Teamwork\Teamwork;
 
 class TeamworkHelpdocsTest extends TeamworkTestCase
 {

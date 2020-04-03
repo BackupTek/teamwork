@@ -2,14 +2,14 @@
 
 namespace DigitalEquation\Teamwork\Services;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Stream;
-use GuzzleHttp\Psr7\Response;
-use Illuminate\Support\Facades\File;
-use GuzzleHttp\Exception\ClientException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkInboxException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkUploadException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Stream;
+use Illuminate\Support\Facades\File;
 
 class Desk
 {
@@ -114,7 +114,7 @@ class Desk
     {
         try {
             /** @var Response $response */
-            $response = $this->client->put('customers/' . $data['customerId'] . '.json', [
+            $response = $this->client->put('customers/'.$data['customerId'].'.json', [
                 'json' => $data,
             ]);
 

@@ -2,11 +2,11 @@
 
 namespace DigitalEquation\Teamwork\Tests;
 
-use DigitalEquation\Teamwork\Teamwork;
-use DigitalEquation\Teamwork\Services\Desk;
 use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkInboxException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkUploadException;
+use DigitalEquation\Teamwork\Services\Desk;
+use DigitalEquation\Teamwork\Teamwork;
 
 class TeamworkDeskTest extends TeamworkTestCase
 {

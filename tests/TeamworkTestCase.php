@@ -2,15 +2,15 @@
 
 namespace DigitalEquation\Teamwork\Tests;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\HandlerStack;
-use Illuminate\Http\Request;
-use GuzzleHttp\Psr7\Response;
-use Illuminate\Http\UploadedFile;
-use Orchestra\Testbench\TestCase;
-use GuzzleHttp\Handler\MockHandler;
 use DigitalEquation\Teamwork\Teamwork;
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Orchestra\Testbench\TestCase;
 
 class TeamworkTestCase extends TestCase
 {

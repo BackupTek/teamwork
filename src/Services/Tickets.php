@@ -2,12 +2,12 @@
 
 namespace DigitalEquation\Teamwork\Services;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Stream;
-use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Exception\ClientException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkParameterException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Stream;
 
 class Tickets
 {

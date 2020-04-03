@@ -2,12 +2,11 @@
 
 namespace DigitalEquation\Teamwork\Console;
 
-use Illuminate\Support\Str;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class InstallCommand extends Command
 {
-
     /**
      * The name and signature of the console command.
      *

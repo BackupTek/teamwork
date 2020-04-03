@@ -22,14 +22,13 @@
   ],
   "require": {
     "php": "^7.1",
-    "guzzlehttp/guzzle": "~7.0",
+    "guzzlehttp/guzzle": "~6.0",
     "illuminate/support": "7.0.*",
     "ext-json": "*"
   },
   "require-dev": {
-    "chiribuc/php-dump": "^1.0",
     "orchestra/testbench": "5.0.*",
-    "phpunit/phpunit": "^7.0"
+    "phpunit/phpunit": "^9.0"
   },
   "autoload": {
     "psr-4": {

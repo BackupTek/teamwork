@@ -16,7 +16,7 @@ class Desk
     /**
      * @var \GuzzleHttp\Client
      */
-    private $client;
+    private Client $client;
 
     /**
      * Desk constructor.
@@ -36,6 +36,8 @@ class Desk
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkInboxException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
     public function inbox($name): array
     {
@@ -44,7 +46,7 @@ class Desk
             $response = $this->client->get('inboxes.json');
             /** @var Stream $body */
             $body    = $response->getBody();
-            $inboxes = json_decode($body->getContents(), true);
+            $inboxes = json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
             $inbox = collect($inboxes['inboxes'])->first(
                 function ($inbox) use ($name) {
@@ -67,6 +69,8 @@ class Desk
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
     public function inboxes(): array
     {
@@ -76,7 +80,7 @@ class Desk
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -87,6 +91,8 @@ class Desk
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
     public function me(): array
     {
@@ -96,7 +102,7 @@ class Desk
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -109,8 +115,10 @@ class Desk
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
-    public function postCustomer($data): array
+    public function postCustomer(array $data): array
     {
         try {
             /** @var Response $response */
@@ -121,7 +129,7 @@ class Desk
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -136,6 +144,8 @@ class Desk
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkUploadException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
     public function upload($userId, $file): array
     {
@@ -147,7 +157,7 @@ class Desk
         $extension = $file->getClientOriginalExtension();
         $path      = sys_get_temp_dir();
         $temp      = $file->move($path, $filename);
-        $stream    = fopen($temp->getPathName(), 'r');
+        $stream    = fopen($temp->getPathName(), 'rb');
 
         try {
             /** @var Response $response */
@@ -164,7 +174,7 @@ class Desk
             ]);
             /** @var Stream $body */
             $body = $response->getBody();
-            $body = json_decode($body->getContents(), true);
+            $body = json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
 
             if (! empty($stream)) {
                 File::delete($temp->getPathName());

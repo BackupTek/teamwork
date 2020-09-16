@@ -12,7 +12,7 @@ class Teamwork
     /**
      * @var \GuzzleHttp\Client
      */
-    protected $client;
+    protected Client $client;
 
     /**
      * ApiClient constructor.

@@ -2,19 +2,19 @@
 
 namespace DigitalEquation\Teamwork\Services;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Stream;
-use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Exception\ClientException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkParameterException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Stream;
 
 class Tickets
 {
     /**
      * @var \GuzzleHttp\Client
      */
-    private $client;
+    private Client $client;
 
     /**
      * Tickets constructor.
@@ -31,6 +31,8 @@ class Tickets
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
     public function priorities(): array
     {
@@ -40,7 +42,7 @@ class Tickets
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -53,8 +55,10 @@ class Tickets
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
-    public function customer($customerId): array
+    public function customer(int $customerId): array
     {
         try {
             /** @var Response $response */
@@ -62,7 +66,7 @@ class Tickets
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -75,8 +79,10 @@ class Tickets
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
-    public function post($data): array
+    public function post(array $data): array
     {
         try {
             /** @var Response $response */
@@ -87,7 +93,7 @@ class Tickets
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -101,6 +107,8 @@ class Tickets
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkParameterException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
     public function reply(array $data): array
     {
@@ -117,7 +125,7 @@ class Tickets
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage());
         }
@@ -130,8 +138,10 @@ class Tickets
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
-    public function ticket($ticketId): array
+    public function ticket(int $ticketId): array
     {
         try {
             /** @var Response $response */
@@ -139,7 +149,7 @@ class Tickets
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }

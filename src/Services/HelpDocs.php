@@ -15,7 +15,7 @@ class HelpDocs
     /**
      * @var \GuzzleHttp\Client
      */
-    private $client;
+    private Client $client;
 
     /**
      * HelpDocs constructor.
@@ -32,6 +32,8 @@ class HelpDocs
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
     public function getSites(): array
     {
@@ -41,21 +43,23 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
     }
 
     /**
-     * Get Helpdocs site.
+     * Get HelpDocs site.
      *
      * @param int $siteID
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
-    public function getSite($siteID): array
+    public function getSite(int $siteID): array
     {
         try {
             /** @var Response $response */
@@ -63,7 +67,7 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -77,6 +81,8 @@ class HelpDocs
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
     public function getCategoryArticles($categoryID, $page = 1): array
     {
@@ -88,7 +94,7 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -102,8 +108,10 @@ class HelpDocs
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
-    public function getSiteArticles($siteID, $page = 1): array
+    public function getSiteArticles(int $siteID, $page = 1): array
     {
         try {
             /** @var Response $response */
@@ -113,7 +121,7 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -126,8 +134,10 @@ class HelpDocs
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
-    public function getArticle($articleID): array
+    public function getArticle(int $articleID): array
     {
         try {
             /** @var Response $response */
@@ -135,7 +145,7 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }
@@ -144,22 +154,22 @@ class HelpDocs
     /**
      * Get articles (in bulk).
      *
-     * @param $articleIDs
+     * @param int[] $articleIDs
      *
      * @return array
      */
-    public function getArticles($articleIDs): array
+    public function getArticles(array $articleIDs): array
     {
         $articles = [];
 
-        $requests = array_map(function ($articleID) {
+        $requests = array_map(static function ($articleID) {
             return new GuzzleRequest('GET', sprintf('helpdocs/articles/%s.json', $articleID));
         }, $articleIDs);
 
         $pool = new GuzzlePool($this->client, $requests, [
             'concurrency' => 10,
             'fulfilled'   => function ($response) use (&$articles) {
-                $response = json_decode($response->getBody(), true);
+                $response = json_decode($response->getBody(), true, 512, JSON_THROW_ON_ERROR);
 
                 $articles[] = $response['article'];
             },
@@ -178,8 +188,10 @@ class HelpDocs
      *
      * @return array
      * @throws \DigitalEquation\Teamwork\Exceptions\TeamworkHttpException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
-    public function getSiteCategories($siteID): array
+    public function getSiteCategories(int $siteID): array
     {
         try {
             /** @var Response $response */
@@ -187,7 +199,7 @@ class HelpDocs
             /** @var Stream $body */
             $body = $response->getBody();
 
-            return json_decode($body->getContents(), true);
+            return json_decode($body->getContents(), true, 512, JSON_THROW_ON_ERROR);
         } catch (ClientException $e) {
             throw new TeamworkHttpException($e->getMessage(), 400);
         }

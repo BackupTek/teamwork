@@ -2,10 +2,10 @@
 
 namespace DigitalEquation\Teamwork\Tests;
 
-use DigitalEquation\Teamwork\Teamwork;
-use DigitalEquation\Teamwork\Services\Tickets;
 use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
 use DigitalEquation\Teamwork\Exceptions\TeamworkParameterException;
+use DigitalEquation\Teamwork\Services\Tickets;
+use DigitalEquation\Teamwork\Teamwork;
 
 class TeamworkTicketsTest extends TeamworkTestCase
 {

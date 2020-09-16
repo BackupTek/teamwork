@@ -2,13 +2,13 @@
 
 namespace DigitalEquation\Teamwork\Services;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Stream;
-use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Pool as GuzzlePool;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Psr7\Request as GuzzleRequest;
 use DigitalEquation\Teamwork\Exceptions\TeamworkHttpException;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Pool as GuzzlePool;
+use GuzzleHttp\Psr7\Request as GuzzleRequest;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Stream;
 
 class HelpDocs
 {
